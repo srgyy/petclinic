@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Owner Info</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+</head>
+<body>
+
+<header th:insert="blocks/header.html :: header"/>
+
+<div class="container mt-5 w-50 p-3">
+    <table class="table table-sm">
+        <thead>
+        <tr>
+            <th scope="col">Owner Information</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Name</th>
+                <td th:text="${owner.getFirstName()} + ' ' + ${owner.getLastName()}"/>
+            </tr>
+            <tr>
+                <th scope="row">Address</th>
+                <td th:text="${owner.getAddress()}"/>
+            </tr>
+            <tr>
+                <th scope="row">City</th>
+                <td th:text="${owner.getCity()}"/>
+            </tr>
+            <tr>
+                <th scope="row">Telephone</th>
+                <td th:text="${owner.getTelephone()}"/>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <div class="d-flex bd-highlight mb-3">
+            <div class="p-2 bd-highlight"><a class="btn btn-dark " role="button" th:href="@{/owners/{id}/edit(id=${owner.getId()})}">Edit Owner</a></div>
+            <div class="p-2 bd-highlight"><a class="btn btn-dark " role="button" th:href="@{/owners/{id}/pets/new(id=${owner.getId()})}">Add New Pet</a></div>
+            <div class="ms-auto p-2 bd-highlight"><a class="btn btn-outline-danger" role="button" th:href="@{/owners/{id}/delete(id=${owner.getId()})}">Delete Owner</a></div>
+        </div>
+    </div>
+</div>
+
+<div th:insert="blocks/pets-and-vets.html :: pets-and-vets"/>
+
+<div th:insert="blocks/footer.html :: footer"/>
+
+</body>
+</html>

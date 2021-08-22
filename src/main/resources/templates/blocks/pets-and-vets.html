@@ -1,0 +1,65 @@
+<div th:fragment="pets-and-vets">
+
+    <div class="container mt-5 w-50 p-3">
+        <table class="table table-sm">
+            <thead>
+            <tr>
+                <th scope="col">Pets and Visits</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="petEl : ${pets}" th:if="${petEl.getOwnerId()} == ${owner.getId()}">
+                    <td >
+                        <div class="container  w-50 ">
+                            <table class="table table-sm">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Name</th>
+                                        <td th:text="${petEl.getName()}">TEXT1</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Birth Date</th>
+                                        <td th:text="${petEl.getBirthDate()}">TEXT2</td>
+                                    </tr>
+                                    <tr th:each="petTypeEl : ${petTypes}" th:if="${petTypeEl.getId()} == ${petEl.getTypeId()}">
+                                        <th scope="row">Type</th>
+                                        <td th:text="${petTypeEl.getType()}">TEXT3</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container  w-50 ">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Visit Date</th>
+                                        <th scope="col">Description</th>
+                                    </tr>
+                                </thead>
+                                    <tbody>
+                                        <tr th:each="visitEl : ${visits}" th:if="${visitEl.getPetId()} == ${petEl.getId()}">
+                                            <td th:text="${visitEl.getDate()}">ROW1</td>
+                                            <td th:text="${visitEl.getDescription()}">ROW2</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a class="link-success" th:href="@{/owners/{id}/pets/{petId}/edit(id=${owner.getId()}, petId=${petEl.getId()})}" >Edit Pet</a>
+                                            </td>
+                                            <td>
+                                                <a class="link-success" th:href="@{/owners/{id}/pets/{petId}/visits/new(id=${owner.getId()}, petId=${petEl.getId()})}" >Add Visit</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                            </table>
+                        </div>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
